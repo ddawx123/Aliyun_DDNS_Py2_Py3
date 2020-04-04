@@ -9,7 +9,6 @@ from re import compile
 from sys import stdout
 from hashlib import sha1
 from urllib import quote
-from requests import post
 from random import randint
 from urllib2 import urlopen
 from urllib2 import Request
@@ -151,13 +150,10 @@ def update_dns(Aliyun_API_RecordID,Aliyun_API_DomainIP):
     Aliyun_API_Response = urlopen(Aliyun_API_Request)
 
 def send_mail(content):
-    return post(
-        "https://api.mailgun.net/v3/example.org/messages",
-        auth=("api", "key-"),
-        data={"from": "Your Name <me@mail.example.org>",
+    return {"from": "Your Name <me@mail.example.org>",
             "to": ["i@example.org", "admin@example.org"],
             "subject": "[Python Report] IP update from ISP",
-            "text": content})
+            "text": content}
 
 def get_time():
     return "[" + time.strftime('#%y%m%d-%H:%M', time.localtime(time.time())) + "]"
